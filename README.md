@@ -1,9 +1,10 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12102013&assignment_repo_type=AssignmentRepo)
+
 # GitHub Profile README Generator
 
 ### Project Description
 
-In this assignment, you will build a GitHub Profile README Generator. The goal of this project is to create a web-based tool that allows users to easily generate and customize their GitHub profile READMEs. A GitHub profile README is a special markdown file displayed on a user's GitHub profile, providing an opportunity to showcase your skills, projects, and personal information.
+In this assignment, you will build a GitHub Profile README Generator. The goal of this project is to create a web-based tool that allows users to easily generate and customize their GitHub profile READMEs. A GitHub profile RE1ADME is a special markdown file displayed on a user's GitHub profile, providing an opportunity to showcase your skills, projects, and personal information.
 
 [View Demo](https://rahuldkjain.github.io/gh-profile-readme-generator/)
 

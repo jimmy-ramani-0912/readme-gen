@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Styled from "styled-components";
 
 function Box(props) {
-  const { show, title, number } = props;
+  const { show, title, number, fun } = props;
   const [rotate, setRotate] = useState(false);
 
   const Box = Styled.div`
@@ -12,6 +12,7 @@ function Box(props) {
     padding:0.4rem 0.8rem;
     background-color:#fff;
     cursor:pointer;
+    margin-bottom:1.6rem;
 
   @keyframes rotateIcon {
     0% {
@@ -59,7 +60,7 @@ function Box(props) {
   }, []);
 
   return (
-    <Box>
+    <Box onClick={fun}>
       <Icon>
         {show === "star" ? (
           <ion-icon name="star-outline"></ion-icon>
