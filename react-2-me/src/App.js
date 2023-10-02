@@ -5,22 +5,30 @@ import Form from "./components/Form/Form";
 import Action from "./components/Action/Action";
 import React, { useState } from "react";
 
+const Container = Styled.div`
+height: 100vh;
+overflow: auto;
+`;
 function App() {
   // const theme = {
   //   color: {
   //     textcolor: "red",
   //   },
   // };
-
   const [showForm, setShowForm] = useState(true);
+  const [Data, setData] = useState({
+    input: [],
+    icons: [],
+    social: [],
+  });
 
-  const Container = Styled.div`
-    height: 100vh;
-    overflow: auto;
-  `;
-
-  const toggleFormVisibility = () => {
+  const handleGenerateReadme = () => {
     setShowForm(!showForm);
+  };
+
+  const handleFormSubmit = (data) => {
+    setData(data);
+    setShowForm(false);
   };
 
   return (
@@ -28,15 +36,14 @@ function App() {
       {/* <ThemeProvider> */}
       <Container>
         <GlobalStyle />
+        <HeadingTitle />
         {showForm ? (
           <>
-            <HeadingTitle />
-            <Form toggleFormVisibility={toggleFormVisibility} />
+            <Form onSubmit={handleFormSubmit} />
           </>
         ) : (
           <>
-            <HeadingTitle />
-            <Action />
+            <Action Data={Data} handleGenerateReadme={handleGenerateReadme} />
           </>
         )}
       </Container>

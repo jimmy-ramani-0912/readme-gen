@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input`
@@ -9,18 +9,28 @@ const StyledInput = styled.input`
   outline: none;
   font-size: 1.8rem;
   width: ${(props) => props.width || "100%"};
+  font-family: "Roboto Mono", serif;
 
   &:focus {
     border-bottom-color: #2c5282;
   }
 `;
 
-function Input(props) {
-  const { width, title, placeholder } = props;
-  const [inputValue, setInputValue] = useState("");
+function Input({ width, title, placeholder, onChange, initialValue, value }) {
+  // const { width, title, placeholder, onChange, initialValue } = props;
+  const [inputValue, setInputValue] = useState(value || "");
+
+  useEffect(() => {
+    // Update the inputValue state when initialValue changes (e.g., when loaded from localStorage)
+    setInputValue(value || "");
+  }, [value]);
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    if (onChange) {
+      onChange(newValue);
+    }
   };
 
   return (

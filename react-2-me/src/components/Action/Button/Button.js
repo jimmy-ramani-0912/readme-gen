@@ -26,7 +26,7 @@ function Button(props) {
   const { Icon, Title, onPressed } = props;
 
   return (
-    <ButtonSec>
+    <ButtonSec onClick={onPressed}>
       <IconSec>
         <ion-icon name={Icon}></ion-icon>
       </IconSec>
