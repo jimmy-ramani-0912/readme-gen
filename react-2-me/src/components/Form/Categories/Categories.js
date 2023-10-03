@@ -34,11 +34,7 @@ const CategoryContainer = styled.h1`
   @media screen and (max-width: 460px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-  }
-
-  @media screen and (max-width: 370px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0rem;
+    row-gap: 3rem;
   }
 `;
 
