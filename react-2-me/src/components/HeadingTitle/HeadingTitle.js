@@ -35,7 +35,7 @@ function Title() {
 
   const fetchData = async () => {
     const res = await fetch(
-      "https://api.github.com/repos/UtsavDesai26/CICD-Pipeline"
+      "https://api.github.com/repos/jimmy-ramani-0912/Location-Based-Attendances"
     );
     const data = await res.json();
     setStar(data.stargazers_count);

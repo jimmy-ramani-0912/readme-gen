@@ -1,28 +1,161 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Styled from "styled-components";
 import Button from "./Button/Button";
+import Markdown from "react-markdown";
 
 const FlexButton = Styled.div`
-display:flex;
-justify-content:space-around;
-margin:3rem 5rem;
+  display: flex;
+  justify-content: space-around;
+  margin: 3rem 5rem;
 `;
 
-const Box = Styled.div`
-background-color: #f3f3f3;
-border:1.4px solid black;
-margin:3rem 8.5vw;
-height:50rem;
-color:black;
-padding:2rem;
-font-size:2rem;
+const BoxStyle = Styled.div`
+  background-color: #f3f3f3;
+  border: 1.4px solid black;
+  margin: 3rem 8.5vw;
+  color: black;
+  padding: 2rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 function Action({ Data, handleGenerateReadme }) {
-  console.log(
-    JSON.stringify(Data) + "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][[[[[[[[[[[[["
-  );
-  console.log(Data.input[0].value + "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]77");
+  const [categories, setCategories] = useState();
+  const savedCategories = localStorage.getItem("categoriesIconData");
+  let filteredData = [];
+  console.log(Data.social);
+  useEffect(() => {
+    if (savedCategories) {
+      filteredData = JSON.parse(savedCategories)
+        .map((category) => {
+          const filteredIcons = category.icons.filter((icon) => icon.isChecked);
+          if (filteredIcons.length > 0) {
+            return {
+              category: category.category,
+              icons: filteredIcons,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+      setCategories(filteredData);
+    }
+  }, []);
+
+  const renderIcons = (icons) => {
+    return icons.map((icon) => (
+      <div key={icon.name}>
+        <img
+          src={icon.iconImage}
+          style={{ marginRight: "2rem", marginBottom: "1.6rem" }}
+          alt={icon.name}
+          width="30"
+          height="30"
+        />
+      </div>
+    ));
+  };
+
+  const renderSocialLinks = (social) => {
+    return social.map((item) => (
+      <a key={item.title} href={item.title + item.value} target="_blank">
+        <img
+          src={item.logo}
+          style={{ marginRight: "1rem" }}
+          width="30"
+          height="30"
+        />
+      </a>
+    ));
+  };
+
+  const aboutMeMarkdown = Data.input
+    .slice(12, 26)
+    .map((_, index) => {
+      const titleIndex = 12 + index * 2;
+      const contentIndex = 13 + index * 2;
+      if (
+        Data.input[titleIndex] === undefined ||
+        Data.input[contentIndex] === undefined
+      ) {
+        return "";
+      }
+      const title = Data.input[titleIndex].value || "";
+      const content = Data.input[contentIndex].value || "";
+      return `${title || content ? `- ${title} ${content}` : ""}`;
+    })
+    .filter(Boolean)
+    .join("\n");
+
+  const markdown = `
+  # ${(Data.input[0].value || "") + " " + (Data.input[1].value || "")}
+  ## ${Data.input[2].value || ""}
+  ---
+
+  ## About Me
+
+  - ${Data.input[3].value || ""}  ${Data.input[4].value || ""} ${
+    Data.input[5].value ? `[${Data.input[5].value}]` : ""
+  }
+
+  - ${Data.input[6].value || ""}  ${Data.input[7].value || ""} ${
+    Data.input[8].value ? `[${Data.input[8].value}]` : ""
+  }
+
+  - ${Data.input[9].value || ""}  ${Data.input[10].value || ""} ${
+    Data.input[11].value ? `[${Data.input[11].value}]` : ""
+  }
+
+  ${aboutMeMarkdown}
+
+  `;
+
+  const finalMarkdown =
+    markdown +
+    `
+  ${
+    categories &&
+    categories
+      .map(
+        (category) => `
+  ### ${category.category}
+
+  ${category.icons
+    .map((icon) => `- [![${icon.name}](${icon.iconImage}](${icon.iconImage})`)
+    .join("\n")}
+  `
+      )
+      .join("\n")
+  }
+
+  ## Social
+
+  ${renderSocialLinks(Data.social)
+    .map(
+      (social) =>
+        `- [![${social.props.href}](${social.props.src})](${social.props.href})`
+    )
+    .join("\n")}
+  `;
+
+  const handleCopyMarkdown = () => {
+    navigator.clipboard.writeText(finalMarkdown);
+    alert("Markdown copied to clipboard!");
+  };
+
+  const handleDownloadMarkdown = () => {
+    const blob = new Blob([finalMarkdown], { type: "text/plain" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "readme.md";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div>
       <FlexButton>
@@ -31,60 +164,31 @@ function Action({ Data, handleGenerateReadme }) {
           Title={"back to edit"}
           onPressed={handleGenerateReadme}
         />
-        <Button Icon={"copy-outline"} Title={"copy-markdown"} onPressed={""} />
+        <Button
+          Icon={"copy-outline"}
+          Title={"copy-markdown"}
+          onPressed={handleCopyMarkdown}
+        />
         <Button
           Icon={"download-outline"}
           Title={"download markdown"}
-          onPressed={""}
+          onPressed={handleDownloadMarkdown}
         />
       </FlexButton>
-      <Box>
-        <div>
-          # {(Data.input[0].value || "") + " " + (Data.input[1].value || "")}
-          <br />
-          {/* {(Data.input[2].value || "") && `## ${Data.input[2].value || ""}`}
-          <br />
-          {(Data.input[4].value || "") &&
-            `🔭 I’m currently working on ${Data.input[4].value || ""} : ${
-              Data.input[6].value || ""
-            }`}
-          <br />
-          {(Data.input[8].value || "") &&
-            `👯 I’m looking to collaborate on ${Data.input[8].value || ""} : ${
-              Data.input[10].value || ""
-            }`}
-          <br />
-          {(Data.input[12].value || "") &&
-            `🤝 I’m looking for help with ${Data.input[12].value || ""} : ${
-              Data.input[14].value || ""
-            }`}
-          <br />
-          {(Data.input[16].value || "") &&
-            `🌱 I’m currently learning ${Data.input[16].value || ""}`}
-          <br />
-          {(Data.input[18].value || "") &&
-            `💬 Ask me about ${Data.input[18].value || ""}`}
-          <br />
-          {(Data.input[20].value || "") &&
-            `📫 How to reach me ${Data.input[20].value || ""}`}
-          <br />
-          {(Data.input[22].value || "") &&
-            `👨‍💻 All of my projects are available at ${
-              Data.input[22].value || ""
-            }`}
-          <br />
-          {(Data.input[24].value || "") &&
-            `📝 I regularly write articles on ${Data.input[24].value || ""}`}
-          <br />
-          {(Data.input[26].value || "") &&
-            `📄 Know about my experiences ${Data.input[26].value || ""}`}
-          <br />
-          {(Data.input[28].value || "") &&
-            `⚡ Fun fact ${Data.input[28].value || ""}`}
-          <br />
-        </div> */}
-        </div>
-      </Box>
+      <BoxStyle>
+        <Markdown>{markdown}</Markdown>
+        {categories &&
+          categories.map((category) => (
+            <div key={category.category}>
+              <h2 style={{ marginBottom: "2rem" }}>{category.category}</h2>
+              <div style={{ display: "flex" }}>
+                {renderIcons(category.icons)}
+              </div>
+            </div>
+          ))}
+        <h2 style={{ marginBottom: "2rem" }}>Social</h2>
+        <div style={{ display: "flex" }}>{renderSocialLinks(Data.social)}</div>
+      </BoxStyle>
     </div>
   );
 }

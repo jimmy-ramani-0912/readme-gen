@@ -27,7 +27,7 @@ const SpaceM = Styled.div`
 height:1.4rem;
 `;
 
-const Box = Styled.div`
+const ButtonBox = Styled.div`
 margin:auto;
 width: 26rem;
 border: 0.2rem solid black;
@@ -1001,6 +1001,9 @@ function Form({ onSubmit }) {
       icons: selectedData,
       social: socialData,
     };
+    console.log(
+      JSON.stringify(finalData) + "]]]]]]]]]]]]]]]]]]]]]]]]]]]]]55566"
+    );
     onSubmit(finalData);
   };
 
@@ -1023,11 +1026,11 @@ function Form({ onSubmit }) {
     localStorage.setItem("inputData", JSON.stringify(inputData));
   };
 
-  const handleSocialInputChange = (title, value) => {
+  const handleSocialInputChange = (title, logo, value) => {
     const socialItemIndex = socialData.findIndex(
       (item) => item.title === title
     );
-    const newSocialItem = { title, value };
+    const newSocialItem = { title, logo, value };
 
     if (socialItemIndex !== -1) {
       const updatedSocialData = [...socialData];
@@ -1176,7 +1179,7 @@ function Form({ onSubmit }) {
           title={"wpn5"}
           placeholder={"react, vue and gsap"}
           value={inputData.find((item) => item.title === "wpn5")?.value || ""}
-          onChange={(value) => handleInputChange("wpn2", value)}
+          onChange={(value) => handleInputChange("wpn5", value)}
         />
       </FlexItem>
       <SpaceM />
@@ -1275,9 +1278,9 @@ function Form({ onSubmit }) {
       <SpaceM />
       <Social socialData={socialData} onInputChange={handleSocialInputChange} />
       <Space />
-      <Box onClick={handleSubmit}>
+      <ButtonBox onClick={handleSubmit}>
         <h1>Generate README</h1>
-      </Box>
+      </ButtonBox>
     </FormCompo>
   );
 }

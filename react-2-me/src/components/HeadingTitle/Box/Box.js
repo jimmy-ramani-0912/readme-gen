@@ -1,51 +1,52 @@
 import React, { useEffect, useState } from "react";
-import Styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const rotateIcon = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const BoxCompo = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1.8px solid #0a0b22;
+  padding: 0.4rem 0.8rem;
+  background-color: #fff;
+  cursor: pointer;
+  margin-bottom: 1.6rem;
+`;
+
+const IconContainer = styled.div`
+  font-size: 1.6rem;
+  margin-right: 1rem;
+`;
+
+const Icon = styled(IconContainer)`
+  animation: ${(props) =>
+    props.rotate ? `${rotateIcon} 0.5s linear` : "none"};
+`;
+
+const BoxTitle = styled.p`
+  font-size: 1.4rem;
+  color: #0a0b22;
+  display: flex;
+  align-items: center;
+  margin: 0;
+`;
+
+const Num = styled.p`
+  color: #762eb6;
+  display: block;
+  margin-left: 0.8rem;
+`;
 
 function Box(props) {
   const { show, title, number, fun } = props;
   const [rotate, setRotate] = useState(false);
-
-  const Box = Styled.div`
-  display:flex;
-    align-items: center;
-    border:1.8px solid #0A0B22;
-    padding:0.4rem 0.8rem;
-    background-color:#fff;
-    cursor:pointer;
-    margin-bottom:1.6rem;
-
-  @keyframes rotateIcon {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  `;
-
-  const Icon = Styled.div`
-  font-size:1.6rem;
-  margin-right:1rem;
-
-  /* ${Box}:hover & { */
-    /* animation: rotateIcon 0.5s linear; }*/
-    animation: ${rotate ? "rotateIcon 0.5s linear" : "none"};
-    `;
-
-  const BoxTitle = Styled.p`
-  font-size:1.4rem;
-  color: #0A0B22;
-  display:flex;
-  align-items: center;
-  margin:0;
-  `;
-
-  const Num = Styled.p`
-  color:#762EB6;
-  display:bloc;
-  margin-left:0.8rem;
-  `;
 
   useEffect(() => {
     const rotationInterval = setInterval(() => {
@@ -60,18 +61,18 @@ function Box(props) {
   }, []);
 
   return (
-    <Box onClick={fun}>
-      <Icon>
+    <BoxCompo onClick={fun}>
+      <IconContainer>
         {show === "star" ? (
           <ion-icon name="star-outline"></ion-icon>
         ) : (
           <ion-icon name="git-network-outline"></ion-icon>
         )}
-      </Icon>
+      </IconContainer>
       <BoxTitle>
         {title} <Num> {number}</Num>
       </BoxTitle>
-    </Box>
+    </BoxCompo>
   );
 }
 

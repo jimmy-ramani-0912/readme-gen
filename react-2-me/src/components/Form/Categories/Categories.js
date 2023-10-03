@@ -118,7 +118,10 @@ function CategoryList({ categoriesDataArr, onSelectionChange }) {
     updatedCategories[categoryIndex].icons[iconIndex].isChecked =
       !updatedCategories[categoryIndex].icons[iconIndex].isChecked;
     setCategories(updatedCategories);
-    localStorage.setItem("categoriesIconData", JSON.stringify(categories));
+    localStorage.setItem(
+      "categoriesIconData",
+      JSON.stringify(updatedCategories)
+    );
   };
 
   const handleClearSearch = () => {
