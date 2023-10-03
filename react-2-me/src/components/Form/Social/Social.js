@@ -7,6 +7,16 @@ const SocialContainer = Styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap:15rem;
   margin:0 20rem;
+
+  @media screen and (max-width: 1200px) {
+    margin:0 4rem;
+    column-gap:5rem;
+}
+
+@media screen and (max-width: 768px) {
+    margin:0;
+    column-gap:1.6rem;
+}
 `;
 
 const SocialLink = Styled.div`
@@ -25,6 +35,12 @@ const IconImage = Styled.img`
   width: 4rem;
   height: 4rem;
   filter: saturate(0);
+
+  @media screen and (max-width: 768px) {
+    margin-right: 1.6rem;
+    width: 2.8rem;
+  height: 2.8rem;
+  }
 `;
 
 const socialLinks = [
@@ -161,10 +177,6 @@ function Social({ socialData, onInputChange }) {
               width={"70%"}
               title={link.title}
               placeholder={link.placeholder}
-              // value={
-              //   (socialData.find((item) => item.title === link.title) || {})
-              //     .value || ""
-              // }
               value={
                 socialData.find((item) => item.title === link.title)?.value ||
                 ""

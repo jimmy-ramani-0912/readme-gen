@@ -6,15 +6,19 @@ const SearchContainer = styled.div`
   align-items: center;
   border: 2px solid black;
   border-radius: 4px;
-  padding: 8px;
-  width: 300px;
+  padding: 0.8rem;
+  width: 30rem;
+
+  @media screen and (max-width: 768px) {
+    width: 25rem;
+  }
 `;
 
 const SearchInput = styled.input`
   flex: 1;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 1.6rem;
 `;
 
 const SearchIcon = styled.span`

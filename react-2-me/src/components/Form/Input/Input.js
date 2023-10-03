@@ -17,11 +17,9 @@ const StyledInput = styled.input`
 `;
 
 function Input({ width, title, placeholder, onChange, initialValue, value }) {
-  // const { width, title, placeholder, onChange, initialValue } = props;
   const [inputValue, setInputValue] = useState(value || "");
 
   useEffect(() => {
-    // Update the inputValue state when initialValue changes (e.g., when loaded from localStorage)
     setInputValue(value || "");
   }, [value]);
 

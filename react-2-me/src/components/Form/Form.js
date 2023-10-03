@@ -7,11 +7,26 @@ import Social from "./Social/Social";
 
 const FormCompo = Styled.div`
 padding: 3rem 5rem;
+
+@media screen and (max-width: 768px) {
+    padding: 3rem;
+}
+@media screen and (max-width: 460px) {
+    padding: 1rem;
+}
 `;
 
 const FlexItem = Styled.div`
 display: flex;
 gap:10rem;
+
+@media screen and (max-width: 768px) {
+  gap:4rem;
+}
+
+@media screen and (max-width: 460px) {
+  gap:2rem;
+}
 `;
 
 const ML = Styled.div`
@@ -1047,16 +1062,15 @@ function Form({ onSubmit }) {
       <FormTitle headingTitle={"Title"} />
       <FlexItem>
         <Input
-          width={"15%"}
+          width={window.innerWidth <= 460 ? "60%" : "15%"}
           title={"title"}
           placeholder={""}
-          // initialValue={"Hi 👋, I'm"}
           value={inputData.find((item) => item.title === "title")?.value || ""}
           onChange={(value) => handleInputChange("title", value)}
         />
         <ML>
           <Input
-            width={"45%"}
+            width={window.innerWidth <= 460 ? "80%" : "45%"}
             title={"title-name"}
             value={
               inputData.find((item) => item.title === "title-name")?.value || ""
@@ -1069,7 +1083,7 @@ function Form({ onSubmit }) {
       <Space />
       <FormTitle headingTitle={"Subtitle"} />
       <Input
-        width={"70%"}
+        width={window.innerWidth <= 460 ? "90%" : "70%"}
         title={"subtitle"}
         placeholder={""}
         value={inputData.find((item) => item.title === "subtitle")?.value || ""}
@@ -1151,14 +1165,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w4"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w4")?.value || ""}
           onChange={(value) => handleInputChange("w4", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn4"}
           placeholder={"Frameworks, courses etc."}
           value={inputData.find((item) => item.title === "wpn4")?.value || ""}
@@ -1168,14 +1182,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w5"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w5")?.value || ""}
           onChange={(value) => handleInputChange("w5", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn5"}
           placeholder={"react, vue and gsap"}
           value={inputData.find((item) => item.title === "wpn5")?.value || ""}
@@ -1185,14 +1199,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w6"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w6")?.value || ""}
           onChange={(value) => handleInputChange("w6", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn6"}
           placeholder={"example@gmail.com"}
           value={inputData.find((item) => item.title === "wpn6")?.value || ""}
@@ -1202,14 +1216,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w7"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w7")?.value || ""}
           onChange={(value) => handleInputChange("w7", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn7"}
           placeholder={"portfolio link"}
           value={inputData.find((item) => item.title === "wpn7")?.value || ""}
@@ -1219,14 +1233,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w8"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w8")?.value || ""}
           onChange={(value) => handleInputChange("w8", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn8"}
           placeholder={"blog link "}
           value={inputData.find((item) => item.title === "wpn8")?.value || ""}
@@ -1236,14 +1250,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w9"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w9")?.value || ""}
           onChange={(value) => handleInputChange("w9", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn9"}
           placeholder={"resume link"}
           value={inputData.find((item) => item.title === "wpn9")?.value || ""}
@@ -1253,14 +1267,14 @@ function Form({ onSubmit }) {
       <SpaceM />
       <FlexItem>
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"w10"}
           placeholder={""}
           value={inputData.find((item) => item.title === "w10")?.value || ""}
           onChange={(value) => handleInputChange("w10", value)}
         />
         <Input
-          width={"35%"}
+          width={window.innerWidth <= 460 ? "50%" : "35%"}
           title={"wpn10"}
           placeholder={"I think I am funny"}
           value={inputData.find((item) => item.title === "wpn10")?.value || ""}

@@ -23,14 +23,33 @@ const CategoryName = styled.div`
 const CategoryContainer = styled.h1`
   margin: 2rem 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Create four equal-width columns */
+  grid-template-columns: repeat(4, 1fr);
   gap: 6rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media screen and (max-width: 370px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0rem;
+  }
 `;
 
 const CategoryItem = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    position: relative;
+  }
 `;
 
 const Tooltip = styled.div`
@@ -42,6 +61,26 @@ const Tooltip = styled.div`
   white-space: nowrap;
   transform: translateY(-100%);
   transform: translateX(30%);
+
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    left: 10rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    top: 6rem;
+    left: 1.6rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    top: 1rem;
+    left: 12rem;
+  }
+
+  @media screen and (max-width: 370px) {
+    top: 1rem;
+    left: 9.5rem;
+  }
 `;
 
 const CheckboxWrapper = styled.label`
@@ -93,25 +132,6 @@ function CategoryList({ categoriesDataArr, onSelectionChange }) {
       setCategories(JSON.parse(savedCategories));
     }
   }, []);
-
-  // useEffect(() => {
-  //   const selectedData = categories.reduce((selectedData, category) => {
-  //     const selectedIcons = category.icons.filter((icon) => icon.isChecked);
-  //     if (selectedIcons.length > 0) {
-  //       selectedData.push({
-  //         category: category.category,
-  //         icons: selectedIcons,
-  //       });
-  //     }
-  //     return selectedData;
-  //   }, []);
-
-  //   if (onSelectionChange) {
-  //     onSelectionChange(selectedData);
-  //   }
-
-  //   localStorage.setItem("categoriesIconData", JSON.stringify(categories));
-  // }, [categories, onSelectionChange]);
 
   const handleCheckboxChange = (categoryIndex, iconIndex) => {
     const updatedCategories = [...categories];
@@ -184,6 +204,10 @@ function CategoryList({ categoriesDataArr, onSelectionChange }) {
                     width="40"
                     height="40"
                     alt={icon.name}
+                    style={{
+                      width: "5.6rem",
+                      height: "5.6rem",
+                    }}
                   />
                   <Tooltip show={hoveredCategory === icon.name}>
                     {icon.name}

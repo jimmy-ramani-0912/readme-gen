@@ -15,11 +15,33 @@ font-size:1.2rem;
 &:hover{
     background-color:#f3f3f3;
 }
+
+@media screen and (max-width: 1200px) {
+  width: 25rem;
+}
+
+@media screen and (max-width: 950px) {
+  width: 20rem;
+  font-size:1rem;
+}
+
+@media screen and (max-width: 620px) {
+  width: 16rem;
+  font-size:0.8rem
+}
+@media screen and (max-width: 520px) {
+width:auto;}
+
 `;
 
 const IconSec = Styled.div`
 font-size:2rem;
-margin-right:1rem;
+`;
+
+const TitleCompo = Styled.h2`
+@media screen and (max-width: 520px) {
+  display: none;
+}
 `;
 
 function Button(props) {
@@ -30,7 +52,7 @@ function Button(props) {
       <IconSec>
         <ion-icon name={Icon}></ion-icon>
       </IconSec>
-      <h2>{Title}</h2>
+      <TitleCompo>{Title}</TitleCompo>
     </ButtonSec>
   );
 }

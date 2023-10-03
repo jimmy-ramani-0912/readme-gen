@@ -25,7 +25,7 @@ function Action({ Data, handleGenerateReadme }) {
   const [categories, setCategories] = useState();
   const savedCategories = localStorage.getItem("categoriesIconData");
   let filteredData = [];
-  console.log(Data.social);
+
   useEffect(() => {
     if (savedCategories) {
       filteredData = JSON.parse(savedCategories)
@@ -49,7 +49,12 @@ function Action({ Data, handleGenerateReadme }) {
       <div key={icon.name}>
         <img
           src={icon.iconImage}
-          style={{ marginRight: "2rem", marginBottom: "1.6rem" }}
+          style={{
+            marginRight: "2rem",
+            marginBottom: "1.6rem",
+            width: "3.6rem",
+            height: "3.6rem",
+          }}
           alt={icon.name}
           width="30"
           height="30"
@@ -123,7 +128,7 @@ function Action({ Data, handleGenerateReadme }) {
   ### ${category.category}
 
   ${category.icons
-    .map((icon) => `- [![${icon.name}](${icon.iconImage}](${icon.iconImage})`)
+    .map((icon) => `- [![${icon.name}](${icon.iconImage})](${icon.iconImage})`)
     .join("\n")}
   `
       )
@@ -134,8 +139,7 @@ function Action({ Data, handleGenerateReadme }) {
 
   ${renderSocialLinks(Data.social)
     .map(
-      (social) =>
-        `- [![${social.props.href}](${social.props.src})](${social.props.href})`
+      (socials) => `- [![${socials.title}](${socials.logo})](${socials.title})`
     )
     .join("\n")}
   `;
@@ -181,7 +185,7 @@ function Action({ Data, handleGenerateReadme }) {
           categories.map((category) => (
             <div key={category.category}>
               <h2 style={{ marginBottom: "2rem" }}>{category.category}</h2>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {renderIcons(category.icons)}
               </div>
             </div>

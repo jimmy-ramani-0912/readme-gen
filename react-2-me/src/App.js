@@ -1,4 +1,4 @@
-import Styled, { ThemeProvider } from "styled-components";
+import Styled from "styled-components";
 import { GlobalStyle } from "./style/Globalstyle/Globalstyle";
 import HeadingTitle from "./components/HeadingTitle/HeadingTitle";
 import Form from "./components/Form/Form";
@@ -11,11 +11,6 @@ overflow: auto;
 `;
 
 function App() {
-  // const theme = {
-  //   color: {
-  //     textcolor: "red",
-  //   },
-  // };
   const [showForm, setShowForm] = useState(true);
   const [Data, setData] = useState({
     input: [],
@@ -34,21 +29,15 @@ function App() {
 
   return (
     <>
-      {/* <ThemeProvider> */}
       <Container>
         <GlobalStyle />
         <HeadingTitle />
         {showForm ? (
-          <>
-            <Form onSubmit={handleFormSubmit} />
-          </>
+          <Form onSubmit={handleFormSubmit} />
         ) : (
-          <>
-            <Action Data={Data} handleGenerateReadme={handleGenerateReadme} />
-          </>
+          <Action Data={Data} handleGenerateReadme={handleGenerateReadme} />
         )}
       </Container>
-      {/* </ThemeProvider> */}
     </>
   );
 }
