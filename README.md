@@ -20,3 +20,7 @@ In this assignment, you will build a GitHub Profile README Generator. The goal o
 - React
 - Styled components
 - CRA
+
+## Contributing
+
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
